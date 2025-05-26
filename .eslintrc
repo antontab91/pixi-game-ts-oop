@@ -1,0 +1,47 @@
+{
+    "root": true,
+    "env": {
+      "browser": true,
+      "es2020": true
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    },
+    "plugins": ["@typescript-eslint", "simple-import-sort"],
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+      "semi": ["error", "always"],                            // всегда ставим ;
+      "quotes": ["error", "single"],                          // только одинарные кавычки
+      "@typescript-eslint/no-unused-vars": ["warn"],         // варны по неиспользуемым переменным
+      "simple-import-sort/imports": [
+        "warn",
+        {
+          "groups": [
+            [
+              "^pixi.js",                                      // pixi в начале
+              "^@?\\w",                                        // внешние npm-пакеты
+              "^[^.]"
+            ],
+            [
+              "^(@core|@utils|@game|@scenes|@ui)(/.*|$)",      //  алиасы 
+              "^\\.\\./",                                      // parent-relative
+              "^\\./"                                          // local-relative
+            ],
+            [
+              "^.+\\.s?css$",                                  // стили
+              "^.+\\.svg$",                                    // svg
+              "^.+\\.png$"                                     // картинки
+            ]
+          ]
+        }
+      ],
+      "simple-import-sort/exports": "error"
+    },
+    "ignorePatterns": ["*.gen.ts"]
+  }
+  

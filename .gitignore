@@ -1,0 +1,45 @@
+# dependencies
+
+node_modules/
+
+# production
+
+dist/
+
+# local env files
+
+.env
+.env.\*
+
+# system
+
+.DS_Store
+Thumbs.db
+
+# logs
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# editor
+
+.vscode/
+.idea/
+
+# typescript
+
+\*.tsbuildinfo
+
+# eslint cache
+
+.eslintcache
+
+# husky
+
+.husky/\_
+
+# optional
+
+\*.local

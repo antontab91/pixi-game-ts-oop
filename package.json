@@ -1,0 +1,42 @@
+{
+    "name": "pixi-ts-oop",
+    "version": "1.0.0",
+    "description": "",
+    "main": "dist/pixi-game.umd.js",
+    "module": "dist/pixi-game.es.js",
+    "types": "dist/PixiGame.d.ts",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "start": "vite",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "lint": "eslint --ext .ts ./src --max-warnings 0",
+        "format": "prettier --write \"src/**/*.{ts,js,json,scss,md}\"",
+        "find-deadcode": "ts-prune > unused-code.txt",
+        "prepare": "husky install"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "packageManager": "pnpm@10.11.0",
+    "dependencies": {
+        "lodash": "^4.17.21",
+        "pixi.js": "^8.9.2"
+    },
+    "devDependencies": {
+        "@types/node": "^22.15.21",
+        "@typescript-eslint/eslint-plugin": "^8.32.1",
+        "@typescript-eslint/parser": "^8.32.1",
+        "eslint": "^9.27.0",
+        "eslint-plugin-simple-import-sort": "^10.0.0",
+        "husky": "^9.1.7",
+        "lint-staged": "^16.0.0",
+        "prettier": "^3.5.3",
+        "rollup-plugin-visualizer": "^6.0.0",
+        "typescript": "^5.8.3",
+        "vite": "^6.3.5",
+        "vite-plugin-checker": "^0.9.3",
+        "vite-tsconfig-paths": "^5.1.4"
+    }
+}

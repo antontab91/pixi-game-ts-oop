@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+      "target": "ES2020",                      // современный синтаксис: async/await, optional chaining и т.д.
+      "module": "ESNext",                      // модульная система — ESM, как требует Vite
+      "moduleResolution": "node",             // как в Node.js: ищет index.ts, node_modules и т.д.
+      "lib": ["DOM", "ESNext"],               // поддержка браузерных API и новых возможностей языка
+      "strict": true,                         // строгий режим: всё должно быть явно типизировано
+      "esModuleInterop": true,                // поддержка CommonJS-модулей с импортом по умолчанию
+      "skipLibCheck": true,                   // не проверять типы внутри node_modules
+      "allowSyntheticDefaultImports": true,  // позволяет делать import default из CJS-модулей
+      "outDir": "dist",                       // куда компилировать .js-файлы
+      "declaration": true,                    // генерировать .d.ts типы для внешнего использования
+      "declarationDir": "dist",               // складывать .d.ts туда же, куда и .js
+      "sourceMap": true,                      // генерировать source maps для отладки
+      "baseUrl": "src",                       // чтобы можно было писать алиасы типа @core/...
+      "types": ["node"]                       // включить глобальные типы Node.js (fs, process и т.п.)
+    },
+    "include": ["src"]                        // компилируем только исходный код из src/
+  }

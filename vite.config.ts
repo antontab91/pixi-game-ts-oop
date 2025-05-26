@@ -1,9 +1,10 @@
-import { defineConfig } from 'vite';
 import { visualizer } from 'rollup-plugin-visualizer';
-import tsconfigPaths from 'vite-tsconfig-paths';
+import { defineConfig } from 'vite';
 import { checker } from 'vite-plugin-checker';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
+    base: '/pixi-ts-oop/',
     plugins: [
         tsconfigPaths(), // для того чтоб не писать все эти ../../ и тд
         checker({ typescript: true }), // запускает живую проверку типов TypeScript, как tsc --noEmit в фоне.
@@ -23,7 +24,6 @@ export default defineConfig({
         open: true,
     },
 
-    //   собирает игру как либу
     build: {
         lib: {
             entry: 'src/PixiGame.ts',
@@ -33,11 +33,6 @@ export default defineConfig({
         },
         rollupOptions: {
             external: ['pixi.js'],
-            output: {
-                manualChunks: {
-                    vendor: ['pixi.js'],
-                },
-            },
         },
     },
 });

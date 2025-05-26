@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 import { checker } from 'vite-plugin-checker';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
     base: '/pixi-ts-oop/',
     plugins: [
         tsconfigPaths(), // для того чтоб не писать все эти ../../ и тд
@@ -17,22 +17,24 @@ export default defineConfig({
         },
     },
     define: {
-        __DEV__: process.env.NODE_ENV === 'development',
+        __DEV__: mode === 'development',
     },
     server: {
         port: 8080,
         open: true,
     },
-
-    build: {
-        lib: {
-            entry: 'src/PixiGame.ts',
-            name: 'PixiGame',
-            fileName: 'pixi-game',
-            formats: ['es', 'umd'],
-        },
-        rollupOptions: {
-            external: ['pixi.js'],
-        },
-    },
-});
+    build:
+        mode === 'production'
+            ? {} // обычная сборка, как SPA
+            : {
+                  lib: {
+                      entry: 'src/PixiGame.ts',
+                      name: 'PixiGame',
+                      fileName: 'pixi-game',
+                      formats: ['es', 'umd'],
+                  },
+                  rollupOptions: {
+                      output: {},
+                  },
+              },
+}));

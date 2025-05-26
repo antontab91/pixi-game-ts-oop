@@ -10,13 +10,16 @@ export class PixiGame {
             backgroundColor: 0x1099bb,
         });
 
-        container.appendChild(this.app.canvas);
+        container.appendChild(this.app.view as HTMLCanvasElement);
 
-        const text = new PIXI.Text('Hello Pixi!', {
-            fontFamily: 'Arial',
-            fontSize: 36,
-            fill: 0xffffff,
-        });
+        const text = new PIXI.Text(
+            'Hello Pixi!',
+            new PIXI.TextStyle({
+                fontFamily: 'Arial',
+                fontSize: 36,
+                fill: 0xffffff,
+            })
+        );
 
         text.x = 100;
         text.y = 100;

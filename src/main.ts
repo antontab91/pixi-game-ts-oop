@@ -7,4 +7,4 @@ const pixiApp = new PixiGame(container);
 const game = new Game(pixiApp);
 game.init();
 
-pixiApp.startTicker({ listener: game.update, context: game });
+pixiApp.startTicker(game.update.bind(game));

@@ -1,7 +1,9 @@
 import { Container, Graphics } from 'pixi.js';
 
 export default class Hero extends Container {
-    private readonly GRAVITY_FORCE = 1;
+    private readonly GRAVITY_FORCE = 0.1;
+    private velocityX = 0;
+    private velocityY = 0;
 
     constructor() {
         super();
@@ -13,6 +15,11 @@ export default class Hero extends Container {
     }
 
     public update(): void {
-        this.y += this.GRAVITY_FORCE;
+        this.velocityY += this.GRAVITY_FORCE;
+        this.y += this.velocityY;
+    }
+
+    public stay(): void {
+        this.velocityY = 0;
     }
 }

@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js';
+import { TickerProps } from 'types/scene';
 
 export default class PixiGame {
     private app: PIXI.Application;
@@ -17,7 +18,10 @@ export default class PixiGame {
         this.app.stage.addChild(displayObject);
     }
 
-    // или хотите перезапускать сцену — обязательно вызывайте destroy() перед пересозданием
+    public startTicker({ listener, context }: TickerProps) {
+        this.app.ticker.add(listener, context);
+    }
+
     public destroy() {
         this.app.destroy(true, { children: true });
     }

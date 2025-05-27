@@ -1,8 +1,10 @@
-import { Game } from './Game';
-import PixiGame from './PixiGame';
+import PixiGame from 'core/PixiGame';
+import { Game } from 'scene/Game';
 
 const container = document.body;
 
-const engine = new PixiGame(container);
-const game = new Game(engine);
+const pixiApp = new PixiGame(container);
+const game = new Game(pixiApp);
 game.init();
+
+pixiApp.startTicker({ listener: game.update, context: game });

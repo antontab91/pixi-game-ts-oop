@@ -1,40 +1,51 @@
-import { visualizer } from 'rollup-plugin-visualizer';
+import { visualizer } from 'rollup-plugin-visualizer'; // визуализация размера бандла
 import { defineConfig } from 'vite';
-import { checker } from 'vite-plugin-checker';
-import tsconfigPaths from 'vite-tsconfig-paths';
+import { checker } from 'vite-plugin-checker'; // запускает проверку типов в dev-сервере
+import tsconfigPaths from 'vite-tsconfig-paths'; // подтягивает alias'ы из tsconfig.json
 
 export default defineConfig(({ mode }) => ({
+    // базовый путь для GitHub Pages (например, username.github.io/pixi-ts-oop)
     base: '/pixi-ts-oop/',
+
     plugins: [
-        tsconfigPaths(), // для того чтоб не писать все эти ../../ и тд
-        checker({ typescript: true }), // запускает живую проверку типов TypeScript, как tsc --noEmit в фоне.
-        visualizer(), // для оптимизации сколько весит каждый модуль, какие зависимости тянут больше всего.
+        tsconfigPaths(), // подключает поддержку alias'ов из tsconfig.json
+        checker({ typescript: true }), // проверка типов как `tsc --noEmit` в фоне
+        visualizer(), // создаёт HTML-файл с визуальной разбивкой по весу модулей
     ],
+
     resolve: {
         alias: {
-            '@core': '/src/core',
-            '@utils': '/src/utils',
+            '@core': '/src/core', // теперь можно писать: import X from '@core/SomeFile'
+            '@utils': '/src/utils', // для вспомогательных функций
         },
     },
+
+    // глобальная переменная __DEV__ будет true только в режиме разработки
     define: {
         __DEV__: mode === 'development',
     },
+
     server: {
-        port: 8080,
-        open: true,
+        port: 8080, // запускает dev-сервер на 8080
+        open: true, // автооткрытие браузера
     },
+
+    // Разные конфигурации под production/dev
     build:
         mode === 'production'
-            ? {} // обычная сборка, как SPA
+            ? {
+                  // стандартная SPA сборка, сюда можно добавить minify, target и пр. при необходимости
+              }
             : {
+                  // в dev-режиме можно собрать как библиотеку для теста/отладки
                   lib: {
-                      entry: 'src/PixiGame.ts',
-                      name: 'PixiGame',
-                      fileName: 'pixi-game',
-                      formats: ['es', 'umd'],
+                      entry: 'src/PixiGame.ts', // точка входа
+                      name: 'PixiGame', // глобальное имя UMD-бандла
+                      fileName: 'pixi-game', // имя выходного файла
+                      formats: ['es', 'umd'], // два формата: ESM и UMD
                   },
                   rollupOptions: {
-                      output: {},
+                      output: {}, // можно добавить external/deps если нужно
                   },
               },
 }));

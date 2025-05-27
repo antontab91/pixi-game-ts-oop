@@ -1,19 +1,56 @@
 {
     "compilerOptions": {
-        "target": "ES2020", // современный синтаксис: async/await, optional chaining и т.д.
-        "module": "ESNext", // модульная система — ESM, как требует Vite
-        "moduleResolution": "node", // как в Node.js: ищет index.ts, node_modules и т.д.
-        "lib": ["DOM", "ESNext"], // поддержка браузерных API и новых возможностей языка
-        "strict": true, // строгий режим: всё должно быть явно типизировано
-        "esModuleInterop": true, // поддержка CommonJS-модулей с импортом по умолчанию
-        "skipLibCheck": true, // не проверять типы внутри node_modules
-        "allowSyntheticDefaultImports": true, // позволяет делать import default из CJS-модулей
-        "outDir": "dist", // куда компилировать .js-файлы
-        "declaration": true, // генерировать .d.ts типы для внешнего использования
-        "declarationDir": "dist", // складывать .d.ts туда же, куда и .js
-        "sourceMap": true, // генерировать source maps для отладки
-        "baseUrl": "src", // чтобы можно было писать алиасы типа @core/...
-        "types": ["node"] // включить глобальные типы Node.js (fs, process и т.п.)
+        // Целевая версия JS (поддержка async/await, optional chaining и т.д.)
+        "target": "ES2020",
+
+        // Система модулей — ES-модули (import/export), как требует Vite
+        "module": "ESNext",
+
+        // Разрешение модулей, как в Node.js (ищет index.ts, расширения и т.д.)
+        "moduleResolution": "node",
+
+        // Подключаемые библиотеки: DOM API и новейшие возможности JS
+        "lib": ["DOM", "ESNext"],
+
+        // Включает строгую типизацию (noImplicitAny, strictNullChecks и др.)
+        "strict": true,
+
+        // Разрешает `import fs from 'fs'` даже если это CommonJS-модуль
+        "esModuleInterop": true,
+
+        // Не проверять типы внутри node_modules (ускоряет компиляцию)
+        "skipLibCheck": true,
+
+        // Разрешает писать `import X from 'cjs-module'`, даже если default нет
+        "allowSyntheticDefaultImports": true,
+
+        // Куда компилировать .js-файлы
+        "outDir": "dist",
+
+        // Генерировать .d.ts файлы (типизацию) для всех файлов
+        "declaration": true,
+
+        // Куда класть .d.ts (в ту же папку dist)
+        "declarationDir": "dist",
+
+        // Генерировать .map файлы для отладки в devtools
+        "sourceMap": true,
+
+        // Базовая директория для всех относительных путей (ниже в paths)
+        "baseUrl": "src",
+
+        // Глобальные типы, например `process` из Node.js
+        "types": ["node"],
+
+        // Алиасы — позволяют импортировать из 'entities/...', а не '../../../'
+        "paths": {
+            "entities/*": ["entities/*"], // -> src/entities/*
+            "core/*": ["core/*"], // -> src/core/*
+            "scene/*": ["scene/*"], // -> src/scene/*
+            "types/*": ["types/*"] // -> src/types/*
+        }
     },
-    "include": ["src"] // компилируем только исходный код из src/
+
+    // Какие файлы компилировать — только содержимое src
+    "include": ["src"]
 }

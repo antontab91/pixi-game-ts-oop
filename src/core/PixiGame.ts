@@ -1,5 +1,4 @@
 import * as PIXI from 'pixi.js';
-import { TickerProps } from 'types/scene';
 
 export default class PixiGame {
     private app: PIXI.Application;
@@ -18,8 +17,8 @@ export default class PixiGame {
         this.app.stage.addChild(displayObject);
     }
 
-    public startTicker({ listener, context }: TickerProps) {
-        this.app.ticker.add(listener, context);
+    public startTicker(listener: VoidFunction) {
+        this.app.ticker.add(listener);
     }
 
     public destroy() {

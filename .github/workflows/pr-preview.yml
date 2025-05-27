@@ -1,0 +1,41 @@
+name: PR Preview
+
+on:
+    pull_request:
+        branches: [master, dev]
+        types: [opened, synchronize, reopened]
+
+jobs:
+    preview:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout PR branch
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: 'pnpm'
+
+            - name: Install pnpm
+              run: npm install -g pnpm
+
+            - name: Install dependencies
+              run: pnpm install
+
+            - name: Lint
+              run: pnpm lint
+
+            - name: Build (dev)
+              run: pnpm build:dev
+
+            - name: Deploy to GitHub Pages (preview)
+              uses: peaceiris/actions-gh-pages@v3
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ./dist
+                  publish_branch: gh-pages
+                  destination_dir: preview/${{ github.head_ref || github.ref_name }}
+                  keep_files: true

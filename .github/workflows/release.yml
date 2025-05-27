@@ -1,0 +1,29 @@
+name: Release
+
+on:
+    push:
+        tags:
+            - 'v*' # например: v1.0.0
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: 'pnpm'
+
+            - run: npm install -g pnpm
+            - run: pnpm install
+            - run: pnpm lint
+            - run: pnpm build:prod
+
+            - name: Deploy to GitHub Pages (release)
+              uses: peaceiris/actions-gh-pages@v3
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ./dist

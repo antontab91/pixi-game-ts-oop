@@ -44,7 +44,7 @@ export default defineConfig(({ mode }) => ({
             : {
                   // в dev-режиме можно собрать как библиотеку для теста/отладки
                   lib: {
-                      entry: resolve(__dirname, 'src/PixiGame.ts'), // точка входа (с абсолютным путём)
+                      entry: resolve(__dirname, 'src/core/PixiGame.ts'), // точка входа (с абсолютным путём)
                       name: 'PixiGame', // глобальное имя UMD-бандла
                       fileName: 'pixi-game', // имя выходного файла
                       formats: ['es', 'umd'], // два формата: ESM и UMD

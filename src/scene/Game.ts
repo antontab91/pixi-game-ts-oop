@@ -1,37 +1,40 @@
 import { Hero, Platform } from 'components';
 import PixiGame from 'core/PixiGame';
+import { InputController } from 'input';
 import { AABBCheckInput } from 'types/game';
 
 export class Game {
     private hero!: Hero;
+    private inputController!: InputController;
     private platforms: Platform[] = [];
 
     constructor(private pixiApp: PixiGame) {}
 
     public init() {
         this.hero = new Hero();
+        this.inputController = new InputController(this.hero);
+        // унаследываны от класса контейнер из Пикси
         this.hero.x = 100;
         this.hero.y = 100;
         this.pixiApp.addToStage(this.hero);
-
-        const platform1 = new Platform();
-        platform1.x = 50;
-        platform1.y = 400;
-        this.pixiApp.addToStage(platform1);
-        this.platforms.push(platform1);
-
-        const platform2 = new Platform();
-        platform2.x = 200;
-        platform2.y = 450;
-        this.pixiApp.addToStage(platform2);
-        this.platforms.push(platform2);
-
-        const platform3 = new Platform();
-        platform3.x = 400;
-        platform3.y = 400;
-        this.pixiApp.addToStage(platform3);
-        this.platforms.push(platform3);
+        this.createPlatforms();
     }
+
+    private createPlatforms() {
+        const positions = [
+            { x: 50, y: 400 },
+            { x: 200, y: 450 },
+            { x: 400, y: 400 },
+        ];
+        for (const position of positions) {
+            const platform = new Platform();
+            platform.x = position.x;
+            platform.y = position.y;
+            this.pixiApp.addToStage(platform);
+            this.platforms.push(platform);
+        }
+    }
+
     public update() {
         const { x: prevX, y: prevY } = this.hero;
         this.hero.update();

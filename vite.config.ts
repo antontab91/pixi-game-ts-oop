@@ -1,7 +1,12 @@
+import { dirname, resolve } from 'path'; // resolve для entry
 import { visualizer } from 'rollup-plugin-visualizer'; // визуализация размера бандла
+import { fileURLToPath } from 'url'; // для корректного пути
 import { defineConfig } from 'vite';
 import { checker } from 'vite-plugin-checker'; // запускает проверку типов в dev-сервере
 import tsconfigPaths from 'vite-tsconfig-paths'; // подтягивает alias'ы из tsconfig.json
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export default defineConfig(({ mode }) => ({
     // базовый путь для GitHub Pages (например, username.github.io/pixi-ts-oop)
@@ -39,7 +44,7 @@ export default defineConfig(({ mode }) => ({
             : {
                   // в dev-режиме можно собрать как библиотеку для теста/отладки
                   lib: {
-                      entry: 'src/PixiGame.ts', // точка входа
+                      entry: resolve(__dirname, 'src/core/PixiGame.ts'), // точка входа (с абсолютным путём)
                       name: 'PixiGame', // глобальное имя UMD-бандла
                       fileName: 'pixi-game', // имя выходного файла
                       formats: ['es', 'umd'], // два формата: ESM и UMD

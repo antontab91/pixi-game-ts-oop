@@ -16,9 +16,7 @@ export default defineConfig(({ mode }) => ({
     resolve: {
         alias: {
             '@core': '/src/core', // теперь можно писать: import X from '@core/SomeFile'
-            '@scene': '/src/scene',
-            '@components': '/src/components',
-            '@types': '/src/types', // для вспомогательных функций
+            '@utils': '/src/utils', // для вспомогательных функций
         },
     },
 

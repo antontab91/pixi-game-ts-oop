@@ -11,6 +11,11 @@ export default class Hero extends Container {
         y: 0,
     };
 
+    private directionContext = {
+        left: 0,
+        right: 0,
+    };
+
     constructor() {
         super();
 
@@ -32,15 +37,37 @@ export default class Hero extends Container {
         this.velocityY = 0;
     }
 
-    public startLeftMove() {
+    public startLeftMove(): void {
+        this.directionContext.left = -1;
+
+        if (this.directionContext.right > 0) {
+            this.movement.x = 0;
+            return;
+        }
+
         this.movement.x = -1;
     }
 
-    public startRightMove() {
+    public startRightMove(): void {
+        this.directionContext.right = 1;
+
+        if (this.directionContext.left < 0) {
+            this.movement.x = 0;
+            return;
+        }
         this.movement.x = 1;
     }
 
-    public stop() {
+    public stop(): void {
         this.movement.x = 0;
+    }
+
+    public stopLeftMove(): void {
+        this.directionContext.left = 0;
+        this.movement.x = this.directionContext.right;
+    }
+    public stopRightMove(): void {
+        this.directionContext.right = 0;
+        this.movement.x = this.directionContext.left;
     }
 }

@@ -13,15 +13,15 @@ export default class PixiGame {
         container.appendChild(this.app.view as HTMLCanvasElement);
     }
 
-    public addToStage(displayObject: PIXI.DisplayObject) {
+    addToStage(displayObject: PIXI.DisplayObject) {
         this.app.stage.addChild(displayObject);
     }
 
-    public startTicker(listener: VoidFunction) {
+    startTicker(listener: VoidFunction) {
         this.app.ticker.add(listener);
     }
 
-    public destroy() {
+    destroy() {
         this.app.destroy(true, { children: true });
     }
 }

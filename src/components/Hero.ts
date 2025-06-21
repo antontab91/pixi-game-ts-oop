@@ -25,7 +25,7 @@ export default class Hero extends Container {
         this.addChild(view);
     }
 
-    public update(): void {
+    update(): void {
         this.velocityX = this.movement.x * this.SPEED;
         this.x += this.velocityX;
 
@@ -33,11 +33,11 @@ export default class Hero extends Container {
         this.y += this.velocityY;
     }
 
-    public stay(): void {
+    stay(): void {
         this.velocityY = 0;
     }
 
-    public startLeftMove(): void {
+    startLeftMove(): void {
         this.directionContext.left = -1;
 
         if (this.directionContext.right > 0) {
@@ -48,7 +48,7 @@ export default class Hero extends Container {
         this.movement.x = -1;
     }
 
-    public startRightMove(): void {
+    startRightMove(): void {
         this.directionContext.right = 1;
 
         if (this.directionContext.left < 0) {
@@ -58,15 +58,15 @@ export default class Hero extends Container {
         this.movement.x = 1;
     }
 
-    public stop(): void {
+    stop(): void {
         this.movement.x = 0;
     }
 
-    public stopLeftMove(): void {
+    stopLeftMove(): void {
         this.directionContext.left = 0;
         this.movement.x = this.directionContext.right;
     }
-    public stopRightMove(): void {
+    stopRightMove(): void {
         this.directionContext.right = 0;
         this.movement.x = this.directionContext.left;
     }

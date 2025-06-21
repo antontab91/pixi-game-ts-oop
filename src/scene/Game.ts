@@ -10,7 +10,7 @@ export class Game {
 
     constructor(private pixiApp: PixiGame) {}
 
-    public init() {
+    init() {
         this.hero = new Hero();
         this.inputController = new InputController(this.hero);
         // унаследываны от класса контейнер из Пикси
@@ -35,7 +35,7 @@ export class Game {
         }
     }
 
-    public update() {
+    update() {
         const { x: prevX, y: prevY } = this.hero;
         this.hero.update();
         for (const platform of this.platforms) {
@@ -57,7 +57,7 @@ export class Game {
         }
     }
 
-    public isCheckAABB({ entity, area }: AABBCheckInput): boolean {
+    isCheckAABB({ entity, area }: AABBCheckInput): boolean {
         return (
             entity.x < area.x + area.width &&
             entity.x + entity.width > area.x &&

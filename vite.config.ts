@@ -9,8 +9,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export default defineConfig(({ mode }) => ({
-    // базовый путь для GitHub Pages (например, username.github.io/pixi-ts-oop)
-    base: '/pixi-ts-oop/',
+    // базовый путь для GitHub Pages (например, username.github.io/pixi-game-ts-oop)
+    base: '/pixi-game-ts-oop/',
 
     plugins: [
         tsconfigPaths(), // подключает поддержку alias'ов из tsconfig.json
